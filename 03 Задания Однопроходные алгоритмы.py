@@ -59,6 +59,9 @@ def process_sequence(filename):
 # Вывод числа прописью по цифрам
 def output_min(number):
     try:
+        if number < 0: # Обработка отрицательных чисел
+            print("Отрицательные числа не обрабатываются")
+            return
         num_str = str(number)
         result = ""
         for digit in num_str:
