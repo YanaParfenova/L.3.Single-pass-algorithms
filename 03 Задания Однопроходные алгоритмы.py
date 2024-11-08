@@ -26,8 +26,13 @@ def process_sequence(filename):
         print(f"Ошибка: файл '{filename}' не найден.")
         return
     
-    # Разбиение строки на числа  
-    numbers = [int(x) for x in sequence_str.split()]
+    numbers = []
+    for char in sequence_str.split():
+        try:
+            num = int(char)
+            numbers.append(num)
+        except ValueError:
+            print(f"Предупреждение: Не удалось преобразовать '{char}' в число. Пропускаем.")
 
     if not numbers:
         print("Последовательность пуста.")
@@ -53,11 +58,14 @@ def process_sequence(filename):
 
 # Вывод числа прописью по цифрам
 def output_min(number):
-    num_str = str(number)
-    result = ""
-    for digit in num_str:
-        result += digits_map[int(digit)] + " "
-    print(result.strip())
+    try:
+        num_str = str(number)
+        result = ""
+        for digit in num_str:
+            result += digits_map[int(digit)] + " "
+        print(result.strip())
+    except (KeyError, ValueError):
+        print("Ошибка: Невозможно преобразовать число в текст.")
 
 
 filename = "input.txt"
